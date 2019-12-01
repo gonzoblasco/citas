@@ -1,13 +1,27 @@
 import React, { Fragment, useState } from "react";
 
-function Formulario() {
-  const [ cita, actualizarCita ] = useState({
+function Cita({ cita }) {
+  return (
+    <div className="cita">
+      <p>Mascota: <span>{ cita.mascota }</span></p>
+      <p>Dueño: <span>{ cita.propietario }</span></p>
+      <p>Fecha: <span>{ cita.fecha }</span></p>
+      <p>Hora: <span>{ cita.hora }</span></p>
+      <p>Síntomas: <span>{ cita.sintomas }</span></p>
+    </div>
+  );
+}
+
+function Formulario({ crearCita }) {
+  const stateInicial = {
     mascota: "",
     propietario: "",
     fecha: "",
     hora: "",
     sintomas: ""
-  });
+  };
+
+  const [ cita, actualizarCita ] = useState(stateInicial);
 
   const actualizarState = e => {
     actualizarCita({
@@ -16,11 +30,17 @@ function Formulario() {
     });
   };
 
+  const enviarCita = e => {
+    e.preventDefault();
+    crearCita(cita);
+    actualizarCita(stateInicial);
+  };
+
   return (
     <Fragment>
       <h2>Crear Cita</h2>
 
-      <form>
+      <form onSubmit={ enviarCita }>
         <label>Nombre Mascota</label>
         <input
           className="u-full-width"
@@ -28,6 +48,7 @@ function Formulario() {
           onChange={ actualizarState }
           placeholder="Nombre Mascota"
           type="text"
+          value={ cita.mascota }
         />
 
         <label>Nombre Dueño</label>
@@ -37,6 +58,7 @@ function Formulario() {
           onChange={ actualizarState }
           placeholder="Nombre Dueño de la Mascota"
           type="text"
+          value={ cita.propietario }
         />
 
         <label>Fecha</label>
@@ -45,6 +67,7 @@ function Formulario() {
           name="fecha"
           onChange={ actualizarState }
           type="date"
+          value={ cita.fecha }
         />
 
         <label>Hora</label>
@@ -53,6 +76,7 @@ function Formulario() {
           name="hora"
           onChange={ actualizarState }
           type="time"
+          value={ cita.hora }
         />
 
         <label>Sintomas</label>
@@ -60,6 +84,7 @@ function Formulario() {
           className="u-full-width"
           name="sintomas"
           onChange={ actualizarState }
+          value={ cita.sintomas }
         ></textarea>
 
         <button type="submit" className="button-primary u-full-width">Agregar</button>
@@ -70,15 +95,29 @@ function Formulario() {
 
 function App() {
   const [ citas, guardarCita ] = useState([]);
+
+  const crearCita = cita => {
+    const nuevasCitas = [ ...citas, cita ];
+    guardarCita(nuevasCitas);
+  };
+
   return (
     <Fragment>
       <h1>Administrador de Pacientes</h1>
       <div className="container">
         <div className="row">
           <div className="one-half column">
-            <Formulario />
+            <Formulario crearCita={ crearCita } />
           </div>
-          <div className="one-half column"></div>
+          <div className="one-half column">
+            { citas.map((cita, index) => (
+              <Cita
+                cita={ cita }
+                index={ index }
+                key={ index }
+              />
+            )) }
+          </div>
         </div>
       </div>
     </Fragment>
