@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
-function Cita({ cita }) {
+function Cita({ cita, eliminarCita, index }) {
   return (
     <div className="cita">
       <p>Mascota: <span>{ cita.mascota }</span></p>
@@ -8,6 +8,11 @@ function Cita({ cita }) {
       <p>Fecha: <span>{ cita.fecha }</span></p>
       <p>Hora: <span>{ cita.hora }</span></p>
       <p>Síntomas: <span>{ cita.sintomas }</span></p>
+      <button
+        className="button eliminar u-full-width"
+        onClick={ () => eliminarCita(index) }
+      >Eliminar X
+      </button>
     </div>
   );
 }
@@ -94,12 +99,37 @@ function Formulario({ crearCita }) {
 }
 
 function App() {
-  const [ citas, guardarCita ] = useState([]);
+  let citasIniciales = JSON.parse(localStorage.getItem("citas"));
+
+  if ( !citasIniciales ) {
+    citasIniciales = [];
+  }
+
+  const [ citas, guardarCita ] = useState(citasIniciales);
 
   const crearCita = cita => {
     const nuevasCitas = [ ...citas, cita ];
     guardarCita(nuevasCitas);
   };
+
+  const eliminarCita = index => {
+    const nuevasCitas = [ ...citas ];
+    nuevasCitas.splice(index, 1);
+    guardarCita(nuevasCitas);
+  };
+
+  useEffect(() => {
+      let citasIniciales = JSON.parse(localStorage.getItem("citas"));
+
+      if ( citasIniciales ) {
+        localStorage.setItem("citas", JSON.stringify(( citas )));
+      } else {
+        localStorage.setItem("citas", JSON.stringify([]));
+      }
+    }, [ citas ]
+  );
+
+  const titulo = Object.keys(citas).length === 0 ? "No Hay Citas" : "Administrar las Citas aquí";
 
   return (
     <Fragment>
@@ -110,9 +140,11 @@ function App() {
             <Formulario crearCita={ crearCita } />
           </div>
           <div className="one-half column">
+            <h2>{ titulo }</h2>
             { citas.map((cita, index) => (
               <Cita
                 cita={ cita }
+                eliminarCita={ eliminarCita }
                 index={ index }
                 key={ index }
               />
