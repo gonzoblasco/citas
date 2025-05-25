@@ -1,102 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-
-function Cita({ cita, eliminarCita, index }) {
-  return (
-    <div className="cita">
-      <p>Mascota: <span>{ cita.mascota }</span></p>
-      <p>Dueño: <span>{ cita.propietario }</span></p>
-      <p>Fecha: <span>{ cita.fecha }</span></p>
-      <p>Hora: <span>{ cita.hora }</span></p>
-      <p>Síntomas: <span>{ cita.sintomas }</span></p>
-      <button
-        className="button eliminar u-full-width"
-        onClick={ () => eliminarCita(index) }
-      >Eliminar X
-      </button>
-    </div>
-  );
-}
-
-function Formulario({ crearCita }) {
-  const stateInicial = {
-    mascota: "",
-    propietario: "",
-    fecha: "",
-    hora: "",
-    sintomas: ""
-  };
-
-  const [ cita, actualizarCita ] = useState(stateInicial);
-
-  const actualizarState = e => {
-    actualizarCita({
-      ...cita,
-      [ e.target.name ]: e.target.value
-    });
-  };
-
-  const enviarCita = e => {
-    e.preventDefault();
-    crearCita(cita);
-    actualizarCita(stateInicial);
-  };
-
-  return (
-    <Fragment>
-      <h2>Crear Cita</h2>
-
-      <form onSubmit={ enviarCita }>
-        <label>Nombre Mascota</label>
-        <input
-          className="u-full-width"
-          name="mascota"
-          onChange={ actualizarState }
-          placeholder="Nombre Mascota"
-          type="text"
-          value={ cita.mascota }
-        />
-
-        <label>Nombre Dueño</label>
-        <input
-          className="u-full-width"
-          name="propietario"
-          onChange={ actualizarState }
-          placeholder="Nombre Dueño de la Mascota"
-          type="text"
-          value={ cita.propietario }
-        />
-
-        <label>Fecha</label>
-        <input
-          className="u-full-width"
-          name="fecha"
-          onChange={ actualizarState }
-          type="date"
-          value={ cita.fecha }
-        />
-
-        <label>Hora</label>
-        <input
-          className="u-full-width"
-          name="hora"
-          onChange={ actualizarState }
-          type="time"
-          value={ cita.hora }
-        />
-
-        <label>Sintomas</label>
-        <textarea
-          className="u-full-width"
-          name="sintomas"
-          onChange={ actualizarState }
-          value={ cita.sintomas }
-        ></textarea>
-
-        <button type="submit" className="button-primary u-full-width">Agregar</button>
-      </form>
-    </Fragment>
-  );
-}
+import Cita from './components/Cita';
+import Formulario from './components/Formulario';
 
 function App() {
   let citasIniciales = JSON.parse(localStorage.getItem("citas"));
@@ -108,25 +12,18 @@ function App() {
   const [ citas, guardarCita ] = useState(citasIniciales);
 
   const crearCita = cita => {
-    const nuevasCitas = [ ...citas, cita ];
+    const nuevasCitas = [ ...citas, {...cita, id: Date.now().toString()} ];
     guardarCita(nuevasCitas);
   };
 
-  const eliminarCita = index => {
-    const nuevasCitas = [ ...citas ];
-    nuevasCitas.splice(index, 1);
+  const eliminarCita = id => {
+    const nuevasCitas = citas.filter(cita => cita.id !== id);
     guardarCita(nuevasCitas);
   };
 
   useEffect(() => {
-      let citasIniciales = JSON.parse(localStorage.getItem("citas"));
-
-      if ( citasIniciales ) {
-        localStorage.setItem("citas", JSON.stringify(( citas )));
-      } else {
-        localStorage.setItem("citas", JSON.stringify([]));
-      }
-    }, [ citas ]
+    localStorage.setItem("citas", JSON.stringify(citas));
+  }, [citas]
   );
 
   const titulo = Object.keys(citas).length === 0 ? "No Hay Citas" : "Administrar las Citas aquí";
@@ -145,8 +42,8 @@ function App() {
               <Cita
                 cita={ cita }
                 eliminarCita={ eliminarCita }
-                index={ index }
-                key={ index }
+                id={cita.id}
+                key={ cita.id }
               />
             )) }
           </div>
