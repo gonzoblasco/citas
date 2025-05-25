@@ -62,20 +62,18 @@ The application uses the browser's `localStorage` to save appointments. This mea
 
 ## Tecnologías Utilizadas (Technologies Used)
 
--   **React:** Biblioteca de JavaScript para construir interfaces de usuario.
-    -   Se utilizaron Hooks como `useState` para el manejo de estados locales y `useEffect` para efectos secundarios (como la interacción con `localStorage`).
-    -   *React:* A JavaScript library for building user interfaces.
-        -   Hooks like `useState` for local state management and `useEffect` for side effects (like `localStorage` interaction) were used.
--   **JavaScript (ES6+):** Lenguaje de programación principal para la lógica de la aplicación.
-    -   *JavaScript (ES6+):* Main programming language for application logic.
--   **HTML5:** Para la estructura semántica del contenido.
-    -   *HTML5:* For the semantic structure of the content.
--   **CSS3:** Para los estilos visuales.
-    -   Incluye estilos personalizados y el uso del framework Skeleton CSS para el layout responsivo.
-    -   Se utilizó Normalize.css para asegurar la consistencia de estilos entre navegadores.
-    -   *CSS3:* For visual styling.
-        -   Includes custom styles and the use of the Skeleton CSS framework for responsive layout.
-        -   Normalize.css was used to ensure style consistency across browsers.
+-   **React:**
+    -   Español: Biblioteca de JavaScript para construir interfaces de usuario. Se utilizaron Hooks como `useState` para el manejo de estados locales y `useEffect` para efectos secundarios (como la interacción con `localStorage`).
+    -   English: A JavaScript library for building user interfaces. Hooks like `useState` for local state management and `useEffect` for side effects (like `localStorage` interaction) were used.
+-   **JavaScript (ES6+):**
+    -   Español: Lenguaje de programación principal para la lógica de la aplicación.
+    -   English: Main programming language for application logic.
+-   **HTML5:**
+    -   Español: Para la estructura semántica del contenido.
+    -   English: For the semantic structure of the content.
+-   **CSS3:**
+    -   Español: Para los estilos visuales. Incluye estilos personalizados y el uso del framework Skeleton CSS para el layout responsivo. Se utilizó Normalize.css para asegurar la consistencia de estilos entre navegadores.
+    -   English: For visual styling. Includes custom styles and the use of the Skeleton CSS framework for responsive layout. Normalize.css was used to ensure style consistency across browsers.
 
 ## Más Información (Learn More)
 
@@ -92,23 +90,33 @@ Una visión general de los archivos y directorios clave del proyecto:
 
 An overview of key project files and directories:
 
--   `public/`: Contiene los archivos estáticos y el `index.html` principal.
-    -   `public/`: Contains static files and the main `index.html` template.
--   `src/`: Contiene el código fuente de la aplicación React.
-    -   `src/`: Contains the React application's source code.
-    -   `App.js`: Es el componente raíz de la aplicación que organiza los demás componentes y la lógica principal.
-        -   `App.js`: The root application component that organizes other components and main logic.
-    -   `components/`: Directorio que alberga los componentes reutilizables de la interfaz de usuario.
-        -   `components/`: Directory housing reusable UI components.
-        -   `Cita.js`: Componente para mostrar una cita individual.
-            -   `Cita.js`: Component for displaying an individual appointment.
-        -   `Formulario.js`: Componente para el formulario de creación de nuevas citas.
-            -   `Formulario.js`: Component for the new appointment creation form.
-    -   `index.js`: Punto de entrada de JavaScript que renderiza el componente `App` en el DOM.
-        -   `index.js`: JavaScript entry point that renders the `App` component into the DOM.
-    -   `index.css`: Archivo para los estilos globales y personalizados de la aplicación.
-        -   `index.css`: File for global and custom application styles.
--   `package.json`: Define los metadatos del proyecto, dependencias y scripts.
-    -   `package.json`: Defines project metadata, dependencies, and scripts.
--   `README.md`: Este archivo, proporcionando información sobre el proyecto.
-    -   `README.md`: This file, providing information about the project.
+-   `public/`:
+    -   Español: Contiene los archivos estáticos y el `index.html` principal.
+    -   English: Contains static files and the main `index.html` template.
+-   `src/`:
+    -   Español: Contiene el código fuente de la aplicación React.
+    -   English: Contains the React application's source code.
+    -   `App.js`:
+        -   Español: Es el componente raíz de la aplicación que organiza los demás componentes y la lógica principal.
+        -   English: The root application component that organizes other components and main logic.
+    -   `components/`:
+        -   Español: Directorio que alberga los componentes reutilizables de la interfaz de usuario.
+        -   English: Directory housing reusable UI components.
+        -   `Cita.js`:
+            -   Español: Componente para mostrar una cita individual.
+            -   English: Component for displaying an individual appointment.
+        -   `Formulario.js`:
+            -   Español: Componente para el formulario de creación de nuevas citas.
+            -   English: Component for the new appointment creation form.
+    -   `index.js`:
+        -   Español: Punto de entrada de JavaScript que renderiza el componente `App` en el DOM.
+        -   English: JavaScript entry point that renders the `App` component into the DOM.
+    -   `index.css`:
+        -   Español: Archivo para los estilos globales y personalizados de la aplicación.
+        -   English: File for global and custom application styles.
+-   `package.json`:
+    -   Español: Define los metadatos del proyecto, dependencias y scripts.
+    -   English: Defines project metadata, dependencies, and scripts.
+-   `README.md`:
+    -   Español: Este archivo, proporcionando información sobre el proyecto.
+    -   English: This file, providing information about the project.
